@@ -1,2 +1,23 @@
-<h1>RetailStores#new</h1>
-<p>Find me in app/views/retail_stores/new.html.erb</p>
+<%= render 'spree/admin/shared/configuration_menu' %>
+
+<% content_for :page_title do %>
+    <%= Spree.t(:new_retail_store) %>
+<% end %>
+
+
+<% content_for :page_actions do %>
+    <li>
+      <%= button_link_to Spree.t(:back_to_retail_stores_list), admin_retail_stores_path, :icon => 'arrow-left' %>
+    </li>
+
+<% end %>
+
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @retail_store } %>
+
+<%= form_for [:admin, @retail_store] do |f| %>
+    <fieldset class="no-border-top">
+      <%= render :partial => 'form', :locals => { :f => f , :address => @retail_store.address} %>
+    </fieldset>
+      <%= render :partial => 'spree/admin/shared/new_resource_links', :locals => { :collection_url => admin_retail_stores_url } %>
+<% end %>

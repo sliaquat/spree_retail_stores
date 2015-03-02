@@ -1,0 +1,41 @@
+
+<div data-hook="admin_retail_store_form_fields">
+
+  <div data-hook="admin_retail_store_form_name_fields" class="alpha six columns">
+    <%= f.field_container :name do %>
+        <%= f.label :name, Spree.t(:name) %>
+        <br/>
+        <%= f.text_field :name, :class => 'fullwidth' %>
+        <%= error_message_on :retail_store, :name %>
+    <% end %>
+  </div>
+
+  <div data-hook="admin_retail_store_form_timings_fields" class="omega six columns">
+    <%= f.field_container :timings do %>
+        <%= f.label :timings, Spree.t(:timings) %>
+        <br/>
+        <%= f.text_area :timings, size: "30x3", :class => 'fullwidth' %>
+        <%= error_message_on :retail_store, :timings %>
+    <% end %>
+  </div>
+
+
+  <%= f.fields_for :address do |address_form| %>
+      <div data-hook="admin_retail_store_form_name_fields" class="alpha six columns">
+        <%= f.field_container :firstname do %>
+            <%= address_form.label :firstname, Spree.t(:first_name) %>
+            <span class="required">*</span><br/>
+            <%= address_form.text_field :firstname, :class => 'required' %>
+            <%= error_message_on :address, :firstname %>
+        <% end %>
+
+        <%= f.field_container :lastname do %>
+            <%= address_form.label :lastname, Spree.t(:last_name) %>
+            <span class="required">*</span><br/>
+            <%= address_form.text_field :lastname, :class => 'required' %>
+            <%= error_message_on :address, :lastname %>
+        <% end %>
+      </div>
+  <% end %>
+
+</div>

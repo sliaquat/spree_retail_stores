@@ -1,0 +1,43 @@
+
+<%= render 'spree/admin/shared/configuration_menu' %>
+
+<% content_for :page_title do %>
+    <%= Spree.t(:retail_stores) %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <li>
+      <%= button_link_to Spree.t(:new_retail_store), new_admin_retail_store_path, :icon => 'plus' %>
+    </li>
+<% end %>
+
+<% if defined?(@retails_stores) && @retails_stores.any? %>
+    <table class="index">
+      <colgroup>
+        <col style="width: 85%">
+        <col style="width: 15%">
+      </colgroup>
+      <thead>
+      <tr data-hook="categories_header">
+        <th><%= Spree.t(:name) %></th>
+        <th class="actions"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @retails_stores.each do |retail_store|%>
+          <tr id="<%= spree_dom_id retail_store %>" data-hook="category_row" class="<%= cycle('odd', 'even')%>">
+            <td class="align-center" style="width:350px;"><%= retail_store.name %></td>
+            <td class="actions">
+              <%= link_to_edit retail_store, :no_text => true %>
+              <%= link_to_delete retail_store, :no_text => true %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <div class="alpha twelve columns no-objects-found">
+        No Retail Stores found,
+      <%= link_to Spree.t(:add_one), spree.new_admin_retail_store_path %>!
+    </div>
+<% end %>

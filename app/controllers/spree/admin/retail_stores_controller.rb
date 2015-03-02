@@ -3,10 +3,16 @@ module Spree
     class RetailStoresController < Spree::Admin::BaseController
 
       def new
+          @retail_store = RetailStore.new
+          @retail_store.address = Address.build_default
+      end
+
+      def index
 
       end
 
-      def show
+
+      def create
 
       end
 

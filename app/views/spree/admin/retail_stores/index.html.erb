@@ -19,14 +19,14 @@
       </colgroup>
       <thead>
       <tr data-hook="categories_header">
-        <th><%= Spree.t(:name) %></th>
+        <th><%= Spree.t(:store_name) %></th>
         <th class="actions"></th>
       </tr>
       </thead>
       <tbody>
       <% @retails_stores.each do |retail_store|%>
           <tr id="<%= spree_dom_id retail_store %>" data-hook="category_row" class="<%= cycle('odd', 'even')%>">
-            <td class="align-center" style="width:350px;"><%= retail_store.name %></td>
+            <td class="align-center" style="width:350px;"><%= retail_store.store_name %></td>
             <td class="actions">
               <%= link_to_edit retail_store, :no_text => true %>
               <%= link_to_delete retail_store, :no_text => true %>

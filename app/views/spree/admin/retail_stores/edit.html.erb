@@ -1,9 +1,8 @@
-<%= render 'spree/admin/shared/configuration_menu' %>
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
 
 <% content_for :page_title do %>
-    <%= Spree.t(:new_retail_store) %>
+    <%= Spree.t(:editing_retail_store) %>
 <% end %>
-
 
 <% content_for :page_actions do %>
     <li>
@@ -12,12 +11,13 @@
 
 <% end %>
 
-
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @retail_store } %>
+
 
 <%= form_for [:admin, @retail_store] do |f| %>
     <fieldset class="no-border-top">
       <%= render :partial => 'form', :locals => { :f => f } %>
     </fieldset>
-      <%= render :partial => 'spree/admin/shared/new_resource_links', :locals => { :collection_url => admin_retail_stores_url } %>
+    <div class="clear"></div>
+    <%= render :partial => 'spree/admin/shared/edit_resource_links', :locals => { :collection_url => admin_retail_stores_url } %>
 <% end %>

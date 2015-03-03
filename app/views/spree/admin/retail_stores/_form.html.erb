@@ -26,7 +26,7 @@
   </div>
   <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
     <%= f.label :address2, Spree.t(:street_address_2) %><br />
-    <%= f.text_field :retail_store, :class => 'fullwidth'%>
+    <%= f.text_field :address2, :class => 'fullwidth'%>
     <%= error_message_on :retail_store, :address2 %>
   </div>
 
@@ -45,11 +45,8 @@
 
   <span > &nbsp</span><br/>
   <div data-hook="admin_retail_store_form_address_fields" class="alpha six columns">
-    <%= f.label :zipcode, Spree.t(:zip) %>
-    <% if address.require_zipcode? %>
-        <span class="required ">*</span><br />
-    <% end %>
-    <%= f.text_field :zipcode, :class => "#{'required fullwidth' if address.require_zipcode?}" %>
+    <%= f.label :zipcode, Spree.t(:zip) %><span class="required ">*</span><br />
+    <%= f.text_field :zipcode, :class => "required fullwidth" %>
     <%= error_message_on :retail_store, :zipcode %>
   </div>
 
@@ -61,8 +58,8 @@
 
   <span > &nbsp</span><br/>
   <div data-hook="admin_retail_store_form_address_fields" class="alpha six columns">
-    <%= f.label :phone, Spree.t(:phone) %><% if address.require_phone? %><span class="required">*</span><br /><% end %>
-    <%= f.phone_field :phone, :class => "#{'required fullwidth' if address.require_phone?}" %>
+    <%= f.label :phone, Spree.t(:phone) %><span class="required">*</span><br />
+    <%= f.phone_field :phone, :class => "required fullwidth" %>
     <%= error_message_on :retail_store, :phone %>
   </div>
   <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">

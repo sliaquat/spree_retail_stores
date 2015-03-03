@@ -7,7 +7,6 @@ module Spree
 
       def new
         @retail_store = Spree::RetailStore.new
-        @retail_store.address = Address.build_default
       end
       #
       def index
@@ -47,9 +46,8 @@ module Spree
       # private
       #
       def permitted_params
-        params.require(:retail_store).permit(:name, :timings, address_attributes: [:firstname, :lastname, :address1, :address2, :city, :country_id, :zipcode, :state, :phone, :alternative_phone, :longitude, :latitude])
-        # {"firstname"=>"Sanad", "lastname"=>"Liaquatt", "address1"=>"4163 Irvington Ave", "address2"=>"Apt 109", "city"=>"fremont",
-        # "country_id"=>"232", "zipcode"=>"94538", "state"=>"California", "phone"=>"6305579771", "alternative_phone"=>"6305579771", "longitude"=>"124", "latitude"=>"3234"}
+        params.require(:retail_store).permit(:store_name, :timings, :address1, :address2, :city, :country, :zipcode, :state, :phone, :alternative_phone, :longitude, :latitude)
+
       end
 
     end

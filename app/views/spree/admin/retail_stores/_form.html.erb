@@ -5,7 +5,7 @@
 <div data-hook="admin_retail_store_form_fields">
 
   <div data-hook="admin_retail_store_form_name_fields" class="alpha six columns">
-    <%= f.label :store_name, Spree.t(:store_name) %>
+    <%= f.label :store_name, Spree.t(:store_name) %><span class="required">*</span><br/>
     <%= f.text_field :store_name, :class => 'fullwidth' %>
     <%= error_message_on :retail_store, :store_name %>
   </div>
@@ -21,25 +21,25 @@
   <div data-hook="admin_retail_store_form_address_fields" class="alpha six columns">
     <%= f.label :address1, Spree.t(:street_address) %>
     <span class="required">*</span><br/>
-    <%= f.text_field :address1, :class => 'required fullwidth' %>
+    <%= f.text_field :address1, :class => 'required fullwidth', :id=>"street1" %>
     <%= error_message_on :retail_store, :address1 %>
   </div>
   <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
     <%= f.label :address2, Spree.t(:street_address_2) %><br />
-    <%= f.text_field :address2, :class => 'fullwidth'%>
+    <%= f.text_field :address2, :class => 'fullwidth', :id=>"street2"%>
     <%= error_message_on :retail_store, :address2 %>
   </div>
 
   <span > &nbsp</span><br/>
   <div data-hook="admin_retail_store_form_address_fields" class="alpha six columns">
     <%= f.label :city, Spree.t(:city) %><span class="required">*</span><br />
-    <%= f.text_field :city, :class => 'required fullwidth' %>
+    <%= f.text_field :city, :class => 'required fullwidth' , :id=>"city"%>
     <%= error_message_on :retail_store, :city %>
   </div>
 
   <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
     <%= f.label :country, Spree.t(:country) %><span class="required">*</span><br />
-    <%= f.collection_select :country, available_countries, :id, :name, {}, {:class => 'required select2 fullwidth'} %>
+    <%= f.collection_select :country, available_countries, :id, :name, {}, {:class => 'required select2 fullwidth', :id=>"country-dropdown"} %>
     <%= error_message_on :retail_store, :country %>
   </div>
 
@@ -52,7 +52,7 @@
 
   <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
     <%= f.label :state, Spree.t(:state) %><span class="required">*</span><br />
-    <%= f.text_field :state, :class => 'fullwidth required'%>
+    <%= f.text_field :state, :class => 'fullwidth required' , :id=>"state-field"%>
     <%= error_message_on :retail_store, :state %>
   </div>
 
@@ -63,21 +63,26 @@
     <%= error_message_on :retail_store, :phone %>
   </div>
   <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
-    <%= f.label :alternative_phone, Spree.t(:alternative_phone) %><br />
-    <%= f.phone_field :alternative_phone, :class => 'fullwidth required' %>
-    <%= error_message_on :retail_store, :alternative_phone %>
+    <%= f.label :email, Spree.t(:email) %><br />
+    <%= f.email_field :email, :class => 'fullwidth required' %>
+    <%= error_message_on :retail_store, :email %>
   </div>
 
   <span > &nbsp</span><br/>
   <div data-hook="admin_retail_store_form_address_fields" class="alpha six columns">
     <%= f.label :longitude, Spree.t(:longitude) %><span class="required">*</span><br />
-    <%= f.text_field :longitude, :class => "required fullwidth" %>
+    <%= f.text_field :longitude, :class => "required fullwidth", :id=>"map_lng" %>
     <%= error_message_on :retail_store, :longitude %>
   </div>
   <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
     <%= f.label :latitude, Spree.t(:latitude) %><span class="required">*</span><br />
-    <%= f.text_field :latitude, :class => 'fullwidth required' %>
+    <%= f.text_field :latitude, :class => 'fullwidth required', :id=>"map_lat" %>
     <%= error_message_on :retail_store, :latitude %>
+  </div>
+
+  <span > &nbsp</span><br/>
+  <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
+    <div id="map-canvas-0" class="map-canvas text-center" style="width: 650px; height: 400px"  name="google-map-element"></div>
   </div>
 
 

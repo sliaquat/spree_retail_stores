@@ -3,32 +3,58 @@ $(document).ready(function () {
     var defaultLng = 67.00993879999999;
     var defaultPosition = new google.maps.LatLng(defaultLat, defaultLng);
     var mapOptions = {center: defaultPosition, zoom: 12};
+    var geocoding = new google.maps.Geocoder();
 
-    $('.map-canvas').each(function () {
-        var current_map_canvas_id = $(this).prop("id");
-        var mp = new google.maps.Map(document.getElementById(current_map_canvas_id), mapOptions);
-        mp["marker"] = [];
+    var current_map_canvas_id = $('.map-canvas').prop("id");
+    var mp = new google.maps.Map(document.getElementById(current_map_canvas_id), mapOptions);
+    mp["marker"] = [];
 
-        updateLatLngForTextFieldsFor(mp, defaultLat, defaultLng, false);
+    updateLatLngForTextFieldsFor(mp, defaultLat, defaultLng, false);
 
-        google.maps.event.addListener(mp, 'click', function (e) {
+    google.maps.event.addListener(mp, 'click', function (e) {
 
-            updateLatLngForTextFieldsFor(mp, e.latLng.lat(), e.latLng.lng(), true);
-        });
+        updateLatLngForTextFieldsFor(mp, e.latLng.lat(), e.latLng.lng(), true);
+    });
 
-    })
+
+    $('#city, #street1, #state-field').on('blur', function (event) {
+        updateMap(geocoding, mp);
+
+    });
+
+
+    $('#country-dropdown').on('change blur', function (event) {
+
+        updateMap(geocoding, mp);
+
+    });
 
 
 });
 
+function updateMap(geocoding,mp){
+    var street1 = $('#street1').val();
+    var street2 = $('#street2').val();
+    var state = $('#state-field').val();
+    var city = $('#city').val();
+    var country = $('#select2-chosen-1').text();
+
+    var address = street1 + " " + street2 + " " + state + " " + city + " " + country
+
+    codeAddress(geocoding, address, mp);
+
+
+}
+
 function updateLatLngForTextFieldsFor(map, lat, lng, forceUpdate) {
-    var currentLat = $(map.getDiv()).closest('li').find('#map_lat').val();
-    var currentLng = $(map.getDiv()).closest('li').find('#map_lng').val();
+    var currentLat = $('#map_lat').val();
+    var currentLng = $('#map_lng').val();
 
     if ((currentLng == "" && currentLat == "") || forceUpdate) {
-        $(map.getDiv()).closest('li').find('#map_lat').val(lat);
-        $(map.getDiv()).closest('li').find('#map_lng').val(lng);
+        $('#map_lat').val(lat);
+        $('#map_lng').val(lng);
     }
+
 
     var marker = map["marker"];
 
@@ -60,9 +86,9 @@ function placeNewMarker(position, map) {
 
 // GEOCODING FUNCTIONS
 
-function codeAddress(geocoding) {
+function codeAddress(geocoding, address, map) {
 
-    var address = $("#business_address").val();
+
     if (address.length > 0) {
 
         geocoding.geocode({'address': address}, function (results, status) {
@@ -74,23 +100,24 @@ function codeAddress(geocoding) {
                 $('#map_lng').val(results[0].geometry.location.lng())
                 $('#map_lat').val(results[0].geometry.location.lat())
 
+                var marker = map["marker"];
                 marker.setPosition(results[0].geometry.location);
             } else {
-                alert("Geocode was not successful for the following reason: " + status);
+                console.log("Geocode was not successful for the following reason: " + status);
             }
         });
     } else {
-        alert("Search field can't be blank");
+        console.log("Search field can't be blank");
     }
 }
-
-var geocoding = new google.maps.Geocoder();
 
 $(document).ready(function () {
     $('#map-button').on('click', function (event) {
         event.preventDefault();
         event.stopPropagation();
-        codeAddress(geocoding);
+//        codeAddress(geocoding);
     });
+
+
 });
 

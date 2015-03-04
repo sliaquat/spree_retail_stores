@@ -11,7 +11,7 @@ class CreateSpreeRetailStores < ActiveRecord::Migration
       t.string :zipcode
       t.string :state
       t.string :phone
-      t.string :alternative_phone
+      t.string :email
       t.decimal :longitude
       t.decimal :latitude
 

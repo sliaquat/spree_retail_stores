@@ -1,5 +1,7 @@
-<% content_for :pre_javascripts do %>
+
+<% content_for :head do %>
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=false"%>
+    <%= javascript_include_tag 'spree/backend/shl-gmaps.js'%>
 <% end %>
 
 <div data-hook="admin_retail_store_form_fields">
@@ -39,7 +41,7 @@
 
   <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
     <%= f.label :country, Spree.t(:country) %><span class="required">*</span><br />
-    <%= f.collection_select :country, available_countries, :id, :name, {}, {:class => 'required select2 fullwidth', :id=>"country-dropdown"} %>
+    <%= f.collection_select :country, available_countries, :name, :name, {}, {:class => 'required select2 fullwidth', :id=>"country-dropdown"} %>
     <%= error_message_on :retail_store, :country %>
   </div>
 

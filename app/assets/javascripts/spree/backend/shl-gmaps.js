@@ -1,6 +1,8 @@
 $(document).ready(function () {
-    var defaultLat = 24.8614622;
-    var defaultLng = 67.00993879999999;
+    var defaultLat = $('#map_lat').val() == '' ? 24.8614622 : $('#map_lat').val();
+    var defaultLng = $('#map_lng').val() == '' ? 67.00993879999999 : $('#map_lng').val();
+
+
     var defaultPosition = new google.maps.LatLng(defaultLat, defaultLng);
     var mapOptions = {center: defaultPosition, zoom: 12};
     var geocoding = new google.maps.Geocoder();

@@ -18,8 +18,8 @@ module Spree
 
       def update
         @retail_store = Spree::RetailStore.find(params[:id])
-        spree_country= Spree::Country.find(permitted_params[:country]).name
-        if(@retail_store.update_attributes(permitted_params.except(:country).merge({:country => spree_country})))
+        # spree_country= Spree::Country.find(permitted_params[:country]).name
+        if(@retail_store.update_attributes(permitted_params))
           flash[:success] = "Retail Store Updated"
           redirect_to admin_retail_stores_path
         else
@@ -36,9 +36,9 @@ module Spree
 
       def create
 
-        spree_country= Spree::Country.find(permitted_params[:country]).name
+        # spree_country= Spree::Country.find(permitted_params[:country]).name
 
-        @retail_store = Spree::RetailStore.new(permitted_params.except(:country).merge({:country => spree_country}))
+        @retail_store = Spree::RetailStore.new(permitted_params)
 
         if(@retail_store.save)
           flash[:success] = "Retail Store Created"

@@ -51,7 +51,7 @@ module Spree
 
         # private
         def permitted_params
-          params.require(:retail_store).permit(:id, :store_name, :timings, :address1, :address2, :city, :country, :zipcode, :state, :phone, :alternative_phone, :longitude, :latitude)
+          params.require(:retail_store).permit(:id, :store_name, :timings, :address1, :address2, :city, :country, :zipcode, :state, :phone, :email, :longitude, :latitude)
 
         end
 

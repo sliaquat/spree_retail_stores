@@ -1,90 +1,115 @@
-
 <% content_for :head do %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=false"%>
-    <%= javascript_include_tag 'spree/backend/shl-gmaps.js'%>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=false" %>
+    <%= javascript_include_tag 'spree/backend/shl-gmaps.js' %>
 <% end %>
 
 <div data-hook="admin_retail_store_form_fields">
 
-  <div data-hook="admin_retail_store_form_name_fields" class="alpha six columns">
-    <%= f.label :store_name, Spree.t(:store_name) %><span class="required">*</span><br/>
-    <%= f.text_field :store_name, :class => 'fullwidth' %>
-    <%= error_message_on :retail_store, :store_name %>
+  <div class="row">
+    <div data-hook="admin_retail_store_form_name_fields" class="col-md-6">
+      <%= f.label :store_name, Spree.t(:store_name) %>
+      <span class="required">*</span><br/>
+      <%= f.text_field :store_name, :class => 'form-control' %>
+      <%= error_message_on :retail_store, :store_name %>
+    </div>
+
+    <div data-hook="admin_retail_store_form_timings_fields" class="col-md-6">
+      <%= f.label :timings, Spree.t(:timings) %>
+      <%= f.text_area :timings, size: "30x3", :class => 'form-control' %>
+      <%= error_message_on :retail_store, :timings %>
+    </div>
   </div>
 
-  <div data-hook="admin_retail_store_form_timings_fields" class="omega six columns">
-    <%= f.label :timings, Spree.t(:timings) %>
-    <%= f.text_area :timings, size: "30x3", :class => 'fullwidth' %>
-    <%= error_message_on :retail_store, :timings %>
+
+  <div class="row">
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
+      <%= f.label :address1, Spree.t(:street_address) %>
+      <span class="required">*</span><br/>
+      <%= f.text_field :address1, :class => 'required form-control', :id => "street1" %>
+      <%= error_message_on :retail_store, :address1 %>
+    </div>
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
+      <%= f.label :address2, Spree.t(:street_address_2) %>
+      <br/>
+      <%= f.text_field :address2, :class => 'form-control', :id => "street2" %>
+      <%= error_message_on :retail_store, :address2 %>
+    </div>
   </div>
 
+  <div class="row">
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
+      <%= f.label :city, Spree.t(:city) %>
+      <span class="required">*</span><br/>
+      <%= f.text_field :city, :class => 'required form-control', :id => "city" %>
+      <%= error_message_on :retail_store, :city %>
+    </div>
 
-  <span > &nbsp</span><br/>
-  <div data-hook="admin_retail_store_form_address_fields" class="alpha six columns">
-    <%= f.label :address1, Spree.t(:street_address) %>
-    <span class="required">*</span><br/>
-    <%= f.text_field :address1, :class => 'required fullwidth', :id=>"street1" %>
-    <%= error_message_on :retail_store, :address1 %>
-  </div>
-  <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
-    <%= f.label :address2, Spree.t(:street_address_2) %><br />
-    <%= f.text_field :address2, :class => 'fullwidth', :id=>"street2"%>
-    <%= error_message_on :retail_store, :address2 %>
-  </div>
-
-  <span > &nbsp</span><br/>
-  <div data-hook="admin_retail_store_form_address_fields" class="alpha six columns">
-    <%= f.label :city, Spree.t(:city) %><span class="required">*</span><br />
-    <%= f.text_field :city, :class => 'required fullwidth' , :id=>"city"%>
-    <%= error_message_on :retail_store, :city %>
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
+      <%= f.label :country, Spree.t(:country) %>
+      <span class="required">*</span><br/>
+      <%= f.collection_select :country, available_countries, :name, :name, {}, {:class => 'required form-control', :id => "country-dropdown"} %>
+      <%= error_message_on :retail_store, :country %>
+    </div>
   </div>
 
-  <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
-    <%= f.label :country, Spree.t(:country) %><span class="required">*</span><br />
-    <%= f.collection_select :country, available_countries, :name, :name, {}, {:class => 'required select2 fullwidth', :id=>"country-dropdown"} %>
-    <%= error_message_on :retail_store, :country %>
+  <div class="row">
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
+      <%= f.label :zipcode, Spree.t(:zip) %>
+      <span class="required ">*</span><br/>
+      <%= f.text_field :zipcode, :class => "required form-control" %>
+      <%= error_message_on :retail_store, :zipcode %>
+    </div>
+
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
+      <%= f.label :state, Spree.t(:state) %>
+      <span class="required">*</span><br/>
+      <%= f.text_field :state, :class => 'form-control required', :id => "state-field" %>
+      <%= error_message_on :retail_store, :state %>
+    </div>
   </div>
 
-  <span > &nbsp</span><br/>
-  <div data-hook="admin_retail_store_form_address_fields" class="alpha six columns">
-    <%= f.label :zipcode, Spree.t(:zip) %><span class="required ">*</span><br />
-    <%= f.text_field :zipcode, :class => "required fullwidth" %>
-    <%= error_message_on :retail_store, :zipcode %>
+  <div class="row">
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
+      <%= f.label :phone, Spree.t(:phone) %>
+      <span class="required">*</span><br/>
+      <%= f.phone_field :phone, :class => "required form-control" %>
+      <%= error_message_on :retail_store, :phone %>
+    </div>
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
+      <%= f.label :email, Spree.t(:email) %>
+      <%= f.email_field :email, :class => 'form-control required' %>
+      <%= error_message_on :retail_store, :email %>
+    </div>
   </div>
 
-  <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
-    <%= f.label :state, Spree.t(:state) %><span class="required">*</span><br />
-    <%= f.text_field :state, :class => 'fullwidth required' , :id=>"state-field"%>
-    <%= error_message_on :retail_store, :state %>
+  <div class="row">
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
+      <%= f.label :longitude, Spree.t(:longitude) %>
+      <span class="required">*</span><br/>
+      <%= f.text_field :longitude, :class => "required form-control", :id => "map_lng" %>
+      <%= error_message_on :retail_store, :longitude %>
+    </div>
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
+      <%= f.label :latitude, Spree.t(:latitude) %>
+      <span class="required">*</span><br/>
+      <%= f.text_field :latitude, :class => 'form-control required', :id => "map_lat" %>
+      <%= error_message_on :retail_store, :latitude %>
+    </div>
   </div>
 
-  <span > &nbsp</span><br/>
-  <div data-hook="admin_retail_store_form_address_fields" class="alpha six columns">
-    <%= f.label :phone, Spree.t(:phone) %><span class="required">*</span><br />
-    <%= f.phone_field :phone, :class => "required fullwidth" %>
-    <%= error_message_on :retail_store, :phone %>
-  </div>
-  <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
-    <%= f.label :email, Spree.t(:email) %><br />
-    <%= f.email_field :email, :class => 'fullwidth required' %>
-    <%= error_message_on :retail_store, :email %>
-  </div>
-
-  <span > &nbsp</span><br/>
-  <div data-hook="admin_retail_store_form_address_fields" class="alpha six columns">
-    <%= f.label :longitude, Spree.t(:longitude) %><span class="required">*</span><br />
-    <%= f.text_field :longitude, :class => "required fullwidth", :id=>"map_lng" %>
-    <%= error_message_on :retail_store, :longitude %>
-  </div>
-  <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
-    <%= f.label :latitude, Spree.t(:latitude) %><span class="required">*</span><br />
-    <%= f.text_field :latitude, :class => 'fullwidth required', :id=>"map_lat" %>
-    <%= error_message_on :retail_store, :latitude %>
-  </div>
-
-  <span > &nbsp</span><br/>
-  <div data-hook="admin_retail_store_form_address_fields" class="omega six columns">
-    <div id="map-canvas-0" class="map-canvas text-center" style="width: 650px; height: 400px"  name="google-map-element"></div>
+  <div class="row">
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            Map
+          </h1>
+        </div>
+        <div class="panel-body">
+          <div id="map-canvas-0" class="map-canvas text-center" style="width: 650px; height: 400px" name="google-map-element"></div>
+        </div>
+      </div>
+    </div>
   </div>
 
 

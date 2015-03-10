@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_retail_stores'
-  s.version     = '0.1.0'
+  s.version     = '0.2.0'
   s.summary     = 'Adds retail stores to spree commerce'
   s.description = 'Includes longitude and latitudes of the stores and timings. API enabled.'
   s.required_ruby_version = '>= 1.9.3'

@@ -1,7 +1,7 @@
 SpreeRetailStores
 =================
 
-Introduction goes here.
+Allows admin to add retail store locations with maps. This extension also exposes API end points 
 
 Installation
 ------------
@@ -36,4 +36,4 @@ Simply add this require statement to your spec_helper:
 require 'spree_retail_stores/factories'
 ```
 
-Copyright (c) 2015 [name of extension creator], released under the New BSD License
+Copyright (c) 2015 Sanad Liaquat, released under the New BSD License

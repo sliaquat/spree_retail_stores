@@ -98,7 +98,7 @@
   </div>
 
   <div class="row">
-    <div data-hook="admin_retail_store_form_address_fields" class="col-md-12">
+    <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h1 class="panel-title">
@@ -107,6 +107,74 @@
         </div>
         <div class="panel-body">
           <div id="map-canvas-0" class="map-canvas text-center" style="width: 650px; height: 400px" name="google-map-element"></div>
+        </div>
+      </div>
+    </div>
+
+    <div data-hook="admin_retail_store_form_store_timings" class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            Store Timings
+          </h1>
+        </div>
+        <div class="panel-body">
+
+
+          <p> All timings are in <strong>"<%=Spree::Config[:store_time_zone]%> (UTC <%=Time.zone.formatted_offset%>)"</strong> time zone. This can be changed in <%=link_to("General Settings Menu", edit_admin_general_settings_path)%></p>
+
+          <%= f.fields_for :store_timings do |store_timings_form| %>
+
+              <div class="store_timing_day">
+                <strong><%= store_timings_form.label store_timings_form.object.day_of_week %></strong>
+                <br>
+                <%= store_timings_form.label :opening_time, Spree.t(:opening_time) %>
+                <%= store_timings_form.time_field :opening_time, class: 'opening_time_field' %>
+                <%= store_timings_form.label :closing_time, Spree.t(:closing_time) %>
+                <%= store_timings_form.time_field :closing_time, class: 'closing_time_field' %>
+                <%= store_timings_form.label :closed, Spree.t(:closed) %>
+                <%= store_timings_form.check_box :closed, class: 'closed_checkbox' %>
+                <%= store_timings_form.hidden_field :day_of_week %>
+                <%= store_timings_form.hidden_field :id %>
+                <br>
+                <br>
+
+              </div>
+          <% end %>
+          <script>
+
+            $(document).ready(function(){
+
+                function toggleTimeFieldStates(checkbox){
+                    if (checkbox.is(":checked")) {
+                        checkbox.parent(".store_timing_day").children(".opening_time_field").prop('disabled', true);
+                        checkbox.parent(".store_timing_day").children(".closing_time_field").prop('disabled', true);
+
+                        checkbox.parent(".store_timing_day").children(".opening_time_field").val('');
+                        checkbox.parent(".store_timing_day").children(".closing_time_field").val('');
+
+                        console.log("checked")
+                    }
+                    else {
+                        console.log("un checked")
+                        checkbox.parent(".store_timing_day").children(".opening_time_field").prop('disabled', false);
+                        checkbox.parent(".store_timing_day").children(".closing_time_field").prop('disabled', false);
+                    }
+                }
+
+                $('.closed_checkbox').each(function(){
+                    toggleTimeFieldStates($(this))
+                })
+
+
+                $('.closed_checkbox').change(function () {
+                    toggleTimeFieldStates($(this))
+                })
+
+            })
+
+          </script>
+
         </div>
       </div>
     </div>

@@ -1,5 +1,8 @@
 module Spree
   class RetailStore < ActiveRecord::Base
+    has_many :store_timings
+    accepts_nested_attributes_for :store_timings
+
     validates :store_name, :address1, :city, :country, :zipcode, :phone, :longitude, :latitude, presence: true
 
     validates :longitude, :latitude, numericality: true
@@ -7,4 +10,5 @@ module Spree
     validates :email, format: {with: VALID_EMAIL_REGEX}, unless: "email.nil?"
 
   end
+
 end

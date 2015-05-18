@@ -13,11 +13,6 @@
       <%= error_message_on :retail_store, :store_name %>
     </div>
 
-    <div data-hook="admin_retail_store_form_timings_fields" class="col-md-6">
-      <%= f.label :timings, Spree.t(:timings) %>
-      <%= f.text_area :timings, size: "30x3", :class => 'form-control' %>
-      <%= error_message_on :retail_store, :timings %>
-    </div>
   </div>
 
 
@@ -106,7 +101,7 @@
           </h1>
         </div>
         <div class="panel-body">
-          <div id="map-canvas-0" class="map-canvas text-center" style="width: 650px; height: 400px" name="google-map-element"></div>
+          <div id="map-canvas-0" class="map-canvas text-center" style="width: 600px; height: 400px" name="google-map-element"></div>
         </div>
       </div>
     </div>

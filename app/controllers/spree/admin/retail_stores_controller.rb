@@ -61,7 +61,7 @@ module Spree
 
         # private
         def permitted_params
-          params.require(:retail_store).permit(:id, :store_name, :timings, :address1, :address2, :city, :country, :zipcode, :state, :phone, :email, :longitude, :latitude, :store_timings_attributes => [:id, :opening_time, :closing_time, :closed, :day_of_week])
+          params.require(:retail_store).permit(:id, :store_name, :address1, :address2, :city, :country, :zipcode, :state, :phone, :email, :longitude, :latitude, :store_timings_attributes => [:id, :opening_time, :closing_time, :closed, :day_of_week])
 
         end
 

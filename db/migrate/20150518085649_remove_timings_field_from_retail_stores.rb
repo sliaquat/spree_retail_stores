@@ -1,5 +1,9 @@
 class RemoveTimingsFieldFromRetailStores < ActiveRecord::Migration
-  def change
-    remove_column :spree_retail_stores, :timings
+  def up
+    remove_column :spree_retail_stores, :timings, :string
+  end
+
+  def down
+    add_column :spree_retail_stores, :timings, :string
   end
 end

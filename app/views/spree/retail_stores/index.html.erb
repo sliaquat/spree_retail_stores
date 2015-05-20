@@ -1,0 +1,80 @@
+<% provide(:title, "Store Locations") %>
+
+<% content_for :head do %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp" %>
+<% end %>
+
+
+
+  <div id="google-map-id" style="height: 800px;"></div>
+  <!--<section id="google-map-id" ></section>-->
+
+
+  <script type="text/javascript">
+      $(document).ready(function () {
+
+          function placeNewMarker(position, map, html) {
+              var marker = new google.maps.Marker({
+                  position: position,
+                  map: map
+
+              });
+
+              var infowindow = new google.maps.InfoWindow({
+                  content: html
+              });
+
+              google.maps.event.addListener(marker, 'click', function () {
+                  infowindow.open(map, marker);
+              });
+
+              map["marker"] = marker;
+
+          }
+
+          var map;
+
+          var mapOptions = {
+              maptype: 'ROADMAP',
+              center: new google.maps.LatLng(<%=@retails_stores.first.latitude%>, <%=@retails_stores.first.longitude%>),
+              zoom: 6,
+              controls: {
+                  panControl: true,
+                  zoomControl: true,
+                  mapTypeControl: false,
+                  scaleControl: false,
+                  streetViewControl: false,
+                  overviewMapControl: false
+              }};
+          map = new google.maps.Map(document.getElementById('google-map-id'),
+                  mapOptions);
+
+          map["marker"] = [];
+
+          var markerLatLngs = []
+          <% @retails_stores.each do |retail_store| %>
+          var latLng = new google.maps.LatLng(<%=retail_store.latitude%>, <%=retail_store.longitude%>)
+          placeNewMarker(latLng, map, "<%=retail_store.html_info%>");
+          markerLatLngs.push(latLng);
+          <%end%>
+
+          //  Create a new viewpoint bound
+          var bounds = new google.maps.LatLngBounds();
+          //  Go through each...
+          for (var i = 0, LtLgLen = markerLatLngs.length; i < LtLgLen; i++) {
+              //  And increase the bounds to take this point
+              bounds.extend(markerLatLngs[i]);
+          }
+          //  Fit these bounds to the map
+          map.fitBounds(bounds);
+
+
+          var mainHTML = $('.content-wrap').html();
+          $('#content').replaceWith(mainHTML);
+      });
+
+
+
+
+
+  </script>

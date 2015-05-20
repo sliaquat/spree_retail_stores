@@ -6,6 +6,8 @@ Spree::Core::Engine.routes.draw do
     end
   end
 
+  resources :retail_stores, only: :index
+
 
   namespace :api, defaults: {format: 'json'} do
     resources :retail_stores, only: :index

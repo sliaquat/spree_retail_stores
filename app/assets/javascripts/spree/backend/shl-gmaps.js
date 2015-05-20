@@ -81,7 +81,6 @@ function placeNewMarker(position, map) {
     });
 
     map["marker"] = marker;
-//    map.setCenter(position)
 
 }
 

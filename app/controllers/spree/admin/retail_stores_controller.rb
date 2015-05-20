@@ -10,6 +10,11 @@ module Spree
 
       def new
         @retail_store = Spree::RetailStore.new
+        if  !@retail_store.store_timings.any?
+          ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].each do |day_of_week|
+            @retail_store.store_timings.build(day_of_week: day_of_week)
+          end
+        end
       end
 
       def index

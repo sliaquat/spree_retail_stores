@@ -10,13 +10,15 @@ module Spree
     validates :email, format: {with: VALID_EMAIL_REGEX}, unless: "email.nil?"
 
     def timing_string_for_day(day_of_week)
-      store_t = store_timings.find_by(day_of_week:day_of_week)
+      store_t = store_timings.find_by(day_of_week: day_of_week)
       return nil unless store_t
 
       if store_t.closed
         return "CLOSED"
-      else
+      elsif (store_t.opening_time && store_t.closing_time)
         return "#{store_t.opening_time.strftime('%l:%M %p')} to #{store_t.closing_time.strftime('%l:%M %p')}"
+      else
+        return "NA"
       end
 
 
@@ -28,7 +30,7 @@ module Spree
       "
       <style>td {padding-right: 10px;}</style>
       <h3>#{store_name}</h3>
-      <strong>Address: </strong>#{address1 + " " + address2 + " "  + city + " "  + zipcode + " "  + country}<br/>
+      <strong>Address: </strong>#{address1 + " " + address2 + " " + city + " " + zipcode + " " + country}<br/>
       <strong>Phone: </strong>#{phone}
       <br/><br/>
       <table >

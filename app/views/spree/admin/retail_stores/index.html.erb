@@ -5,7 +5,7 @@
 <% end %>
 
 <% content_for :page_actions do %>
-      <%= button_link_to Spree.t(:new_retail_store), new_admin_retail_store_path, :class => "btn-success", :icon => 'plus' %>
+    <%= button_link_to Spree.t(:new_retail_store), new_admin_retail_store_path, :class => "btn-success", :icon => 'plus' %>
 <% end %>
 
 <% if defined?(@retails_stores) && @retails_stores.any? %>
@@ -13,6 +13,9 @@
       <thead>
       <tr data-hook="admin_shipping_methods_index_headers">
         <th><%= Spree.t(:store_name) %></th>
+        <th><%= Spree.t(:address) %></th>
+        <th><%= Spree.t(:phone) %></th>
+        <th><%= Spree.t(:use_timings_for_delivery) %></th>
         <th data-hook="admin_retail_stores_index_header_actions" class="actions"></th>
       </tr>
       </thead>
@@ -21,6 +24,9 @@
       <% @retails_stores.each do |retail_store|%>
           <tr id="<%= spree_dom_id retail_store %>" data-hook="category_row" class="<%= cycle('odd', 'even')%>">
             <td><%= retail_store.store_name %></td>
+            <td><%= retail_store.full_address %></td>
+            <td><%= retail_store.phone %></td>
+            <td><%= retail_store.use_timings_for_delivery? ? "YES" : "NO" %></td>
             <td data-hook="admin_retail_stores_index_row_actions" class="actions actions-2 text-right">
               <%= link_to_edit(retail_store, :no_text => true) %>
               <%= link_to_delete(retail_store, :no_text => true)%>
@@ -32,7 +38,7 @@
     </table>
 <% else %>
     <div class="alert alert-info no-objects-found">
-        No Retail Stores found,
+      No Retail Stores found,
       <%= link_to Spree.t(:add_one), spree.new_admin_retail_store_path %>!
     </div>
 <% end %>

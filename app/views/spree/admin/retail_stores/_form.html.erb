@@ -81,8 +81,8 @@
     <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
       <%= f.label :longitude, Spree.t(:longitude) %>
       <span class="required">*</span><br/>
-      <%= f.text_field :longitude, :class => "required form-control", :id => "map_lng" %>
       <%= error_message_on :retail_store, :longitude %>
+      <%= f.text_field :longitude, :class => "required form-control", :id => "map_lng" %>
     </div>
     <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
       <%= f.label :latitude, Spree.t(:latitude) %>
@@ -114,9 +114,13 @@
           </h1>
         </div>
         <div class="panel-body">
-
-
-          <p> All timings are in <strong>"<%=Spree::Config[:store_time_zone]%> (UTC <%=Time.zone.formatted_offset%>)"</strong> time zone. This can be changed in <%=link_to("General Settings Menu", edit_admin_general_settings_path)%></p>
+          <div class="alert alert-info" role="alert"><strong>Note:</strong> only one store's timing can be used for delivery</div>
+          <%= f.label :use_timings_for_delivery, "Use this store's timing for delivery" %>
+          <span >: </span>
+          <%= f.check_box :use_timings_for_delivery%>
+          <br>
+          <br>
+          <p> All timings are in <strong>"<%=Spree::Config[:store_time_zone]%> (UTC <%=Time.zone.formatted_offset%>)"</strong> time zone. Change this in <%=link_to("General Settings Menu", edit_admin_general_settings_path)%></p>
 
           <%= f.fields_for :store_timings do |store_timings_form| %>
 
@@ -131,6 +135,7 @@
                 <%= store_timings_form.check_box :closed, class: 'closed_checkbox' %>
                 <%= store_timings_form.hidden_field :day_of_week %>
                 <%= store_timings_form.hidden_field :id %>
+                <div style="color: red"><%= error_message_on store_timings_form.object, :base %></div>
                 <br>
                 <br>
 

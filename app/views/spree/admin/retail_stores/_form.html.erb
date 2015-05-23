@@ -133,9 +133,11 @@
                 <%= store_timings_form.time_field :closing_time, class: 'closing_time_field' %>
                 <%= store_timings_form.label :closed, Spree.t(:closed) %>
                 <%= store_timings_form.check_box :closed, class: 'closed_checkbox' %>
+                <div style="color: red"><%= error_message_on store_timings_form.object, :opening_time %></div>
+                <div style="color: red"><%= error_message_on store_timings_form.object, :closing_time %></div>
                 <%= store_timings_form.hidden_field :day_of_week %>
                 <%= store_timings_form.hidden_field :id %>
-                <div style="color: red"><%= error_message_on store_timings_form.object, :base %></div>
+
                 <br>
                 <br>
 

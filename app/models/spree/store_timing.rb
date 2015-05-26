@@ -29,7 +29,7 @@ class Spree::StoreTiming < ActiveRecord::Base
   def opening_time_adjusted_to_day(day)
     Time.zone = Spree::Config[:store_time_zone];
     if (self.opening_time && self.closing_time)
-      day.change({hour: self.opening_time.hour, min: self.opening_time.min, sec: 0})
+      return day.change({hour: self.opening_time.hour, min: self.opening_time.min, sec: 0})
     end
     return nil
   end

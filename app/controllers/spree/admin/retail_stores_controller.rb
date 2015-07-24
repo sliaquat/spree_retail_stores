@@ -42,12 +42,7 @@ module Spree
         end
 
       end
-      #
-      def destroy
-        Spree::RetailStore.find(params[:id]).destroy
-        flash[:success] = "Retail Store Deleted"
-        redirect_to admin_retail_stores_path
-      end
+
 
       def create
 

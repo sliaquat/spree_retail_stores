@@ -72,6 +72,7 @@
     </div>
     <div data-hook="admin_retail_store_form_address_fields" class="col-md-6">
       <%= f.label :email, Spree.t(:email) %>
+      <span class="required">*</span><br/>
       <%= f.email_field :email, :class => 'form-control required' %>
       <%= error_message_on :retail_store, :email %>
     </div>
